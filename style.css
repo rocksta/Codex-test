@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+    background: #70c5ff;
+    cursor: crosshair;
+}
+
+canvas {
+    display: block;
+    margin: 0 auto;
+    background: #8EDB5A;
+}
+
+#score {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: white;
+    font-family: sans-serif;
+}
