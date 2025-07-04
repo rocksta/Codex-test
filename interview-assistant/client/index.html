@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interview Assistant</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    #log { border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: auto; white-space: pre-line; }
+  </style>
+</head>
+<body>
+  <h1>Interview Assistant</h1>
+  <div id="log"></div>
+  <input id="question" type="text" placeholder="Ask a question" style="width:80%">
+  <button id="send">Send</button>
+
+  <script>
+    const ws = new WebSocket(`ws://${location.host}`);
+    const log = document.getElementById('log');
+    const input = document.getElementById('question');
+    const sendBtn = document.getElementById('send');
+
+    ws.addEventListener('message', (event) => {
+      log.textContent += event.data;
+    });
+
+    sendBtn.addEventListener('click', () => {
+      const text = input.value.trim();
+      if (!text) return;
+      log.textContent += '\n> ' + text + '\n';
+      ws.send(text);
+      input.value = '';
+    });
+  </script>
+</body>
+</html>
